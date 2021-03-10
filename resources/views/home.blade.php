@@ -3,10 +3,14 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <example-component></example-component>
+        <create-job></create-job>
     </div>
     <div class="row justify-content-center">
-        <example-component></example-component>
+        <index-job></index-job>
+    </div>
+
+    <div class="row justify-content-center">
+        <articles></articles>
     </div>
 </div>
 @endsection

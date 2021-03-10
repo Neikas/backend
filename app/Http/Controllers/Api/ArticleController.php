@@ -6,7 +6,7 @@ use App\Models\Article;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class ArricleController extends Controller
+class ArticleController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,7 +15,8 @@ class ArricleController extends Controller
      */
     public function index()
     {
-        //
+        Article::all();
+       return response()->json([Article::all()]);
     }
 
     /**
