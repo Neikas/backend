@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
-use App\Models\Job;
+use App\Models\Url;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
-class JobController extends Controller
+class UrlController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -41,10 +42,10 @@ class JobController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Job  $job
+     * @param  \App\Models\Url  $url
      * @return \Illuminate\Http\Response
      */
-    public function show(Job $job)
+    public function show(Url $url)
     {
         //
     }
@@ -52,10 +53,10 @@ class JobController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Job  $job
+     * @param  \App\Models\Url  $url
      * @return \Illuminate\Http\Response
      */
-    public function edit(Job $job)
+    public function edit(Url $url)
     {
         //
     }
@@ -64,10 +65,10 @@ class JobController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Job  $job
+     * @param  \App\Models\Url  $url
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Job $job)
+    public function update(Request $request, Url $url)
     {
         //
     }
@@ -75,10 +76,10 @@ class JobController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Job  $job
+     * @param  \App\Models\Url  $url
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Job $job)
+    public function destroy(Url $url)
     {
         //
     }

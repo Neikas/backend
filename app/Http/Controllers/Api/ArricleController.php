@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
-use App\Models\Url;
+use App\Models\Article;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
-class UrlController extends Controller
+class ArricleController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -41,10 +42,10 @@ class UrlController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Url  $url
+     * @param  \App\Models\Article  $article
      * @return \Illuminate\Http\Response
      */
-    public function show(Url $url)
+    public function show(Article $article)
     {
         //
     }
@@ -52,10 +53,10 @@ class UrlController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Url  $url
+     * @param  \App\Models\Article  $article
      * @return \Illuminate\Http\Response
      */
-    public function edit(Url $url)
+    public function edit(Article $article)
     {
         //
     }
@@ -64,10 +65,10 @@ class UrlController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Url  $url
+     * @param  \App\Models\Arricle  $article
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Url $url)
+    public function update(Request $request, Article $article)
     {
         //
     }
@@ -75,10 +76,10 @@ class UrlController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Url  $url
+     * @param  \App\Models\Arricle  $article
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Url $url)
+    public function destroy(Article $article)
     {
         //
     }
