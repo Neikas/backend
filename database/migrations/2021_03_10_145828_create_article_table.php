@@ -17,7 +17,7 @@ class CreateArticleTable extends Migration
             $table->id();
             $table->string('title');
             $table->longText('text');
-            $table->foreignId('url_id');
+            $table->foreignId('job_id');
             $table->timestamps();
         });
     }

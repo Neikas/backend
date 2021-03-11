@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 Route::view('/{any}', 'layouts.app')->where('any', '.*');
-
+//Route::get('test', [\App\Http\Controllers\ScraperController::class, 'index']);
 Auth::routes();
 
 

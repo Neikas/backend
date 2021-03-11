@@ -1901,7 +1901,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -2052,13 +2051,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  props: {
-    article: {
-      type: String,
-      required: true
-    }
-  },
   data: function data() {
     return {
       jobs: {},
@@ -37952,14 +37947,14 @@ var render = function() {
     _c(
       "div",
       { staticClass: "row justify-content-center" },
-      _vm._l(_vm.jobs[0], function(job, index) {
+      _vm._l(this.jobs, function(job) {
         return _c("div", { staticClass: "card" }, [
-          _c("div", { staticClass: "card-header" }, [_vm._v(_vm._s(job.name))]),
+          _c("div", { staticClass: "card-header" }, [
+            _vm._v(_vm._s(job.title))
+          ]),
           _vm._v(" "),
           _c("div", { staticClass: "card-body" }, [
-            _c("h1", [_vm._v(_vm._s(job.articles[0].title))]),
-            _vm._v(" "),
-            _c("h1", [_vm._v(_vm._s(job.articles[0].text))])
+            _c("h4", [_vm._v(_vm._s(job.text))])
           ])
         ])
       }),
@@ -38158,7 +38153,11 @@ var render = function() {
                               }
                             }
                           },
-                          [_vm._v("Chceck articles")]
+                          [
+                            _vm._v(
+                              "Chceck articles\n                                "
+                            )
+                          ]
                         )
                       ],
                       1

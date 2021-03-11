@@ -20,7 +20,9 @@
                                 <td>{{ job.status }}</td>
                                 <td>{{ job.started_at }}</td>
                                 <td>
-                                    <router-link :to="{name: 'article.show', params: {'id' : job.id } }" class="btn btn-primary m-4">Chceck articles</router-link>
+                                    <router-link :to="{name: 'article.show', params: {'id' : job.id } }"
+                                                 class="btn btn-primary m-4">Chceck articles
+                                    </router-link>
                                 </td>
                             </tr>
                             </tbody>
@@ -34,12 +36,6 @@
 </template>
 <script>
 export default {
-    props: {
-        article: {
-            type: String,
-            required: true,
-        }
-    },
     data() {
         return {
             jobs: {},
