@@ -35,7 +35,9 @@
                     @endauth
                 </div>
             @endif
-
+                <a type="button" href="{{ route('job.create') }}" class="btn btn-primary m-4">{{ __('Created new Job') }}</a>
+                <a type="button" href="{{ route('job.index') }}" class="btn btn-secondary m-4">{{ __('Check Job status') }}</a>
+                <a type="button" href="{{ route('article.index') }}" class="btn btn-success m-4" >{{ __('Check articles') }}</a>
             <div class="max-w-6xl mx-auto sm:px-6 lg:px-8">
                 <div class="flex justify-center pt-8 sm:justify-start sm:pt-0">
                     <svg viewBox="0 0 651 192" fill="none" xmlns="http://www.w3.org/2000/svg" class="h-16 w-auto text-gray-700 sm:h-20">

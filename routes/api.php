@@ -22,6 +22,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::get('articles', [ArticleController::class, 'index']);
+Route::get('articles/show/{id}', [ArticleController::class, 'show']);
 Route::post('job/store', [JobController::class, 'store']);
 Route::get('job/index', [JobController::class, 'index']);
 Route::get('job/status/{job}', [JobController::class, 'status']);

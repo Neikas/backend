@@ -10,7 +10,7 @@
     </div>
 
     <div class="row justify-content-center">
-        <articles></articles>
+
     </div>
 </div>
 @endsection

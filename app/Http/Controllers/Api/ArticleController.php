@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Models\Article;
+use App\Models\Job;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -46,9 +47,11 @@ class ArticleController extends Controller
      * @param  \App\Models\Article  $article
      * @return \Illuminate\Http\Response
      */
-    public function show(Article $article)
+    public function show( $id)
     {
-        //
+        $job = Job::findOrFail($id);
+        $article = $job->urls()->with('articles')->get();
+        return response()->json([$article]);
     }
 
     /**
