@@ -4,11 +4,10 @@ namespace App\Listeners;
 
 use App\Http\Controllers\ScraperController;
 use App\Models\Article;
-use App\Models\CrawlerJob;
 use App\Services\ScraperService;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
-class AddJobToCralwerListener
+class AddJobToCralwerListener implements ShouldQueue
 {
     /**
      * Handle the event.

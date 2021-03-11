@@ -7,7 +7,7 @@
                 </a>
 
                 <router-link to="/" class="btn btn-primary m-4">Jobs List</router-link>
-                <router-link to="job/create" class="btn btn-primary m-4">Create New job</router-link>
+                <router-link to="/job/create" class="btn btn-primary m-4">Create New job</router-link>
 
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                         aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="">

@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Http\Controllers\Controller;
 use App\Models\Article;
 use App\Models\CrawlerJob;
-use App\Models\Job;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 
 class ArticleController extends Controller
 {
@@ -17,8 +16,8 @@ class ArticleController extends Controller
      */
     public function index()
     {
-
         Article::all();
+
         return response()->json([Article::all()]);
     }
 

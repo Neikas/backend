@@ -17,7 +17,7 @@ class JobResource extends JsonResource
         return [
             'id' => $this->id,
             'status' => $this->status,
-            'started_at' => $this->started_at,
+            'finished_at' => $this->finished_at,
         ];
     }
 }

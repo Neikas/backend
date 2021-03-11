@@ -53,12 +53,12 @@ export default {
             this.form_submitting = true;
             axios.post('http://backend.test/api/job/store', this.fields)
                 .then((response) => {
-                    this.form_submitting = false
+                    this.form_submitting = false;
                     this.success = response.data.success;
                 }).catch((error) => {
+                this.form_submitting = false;
                 this.success = '';
                 this.errors = error.response.data;
-                console.log(this.errors.message);
 
             });
         }

@@ -1905,7 +1905,7 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       'id': this.$route.params.id,
-      'jobs': {},
+      'articles': {},
       'errors': {}
     };
   },
@@ -1917,8 +1917,8 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       axios.get('http://backend.test/api/articles/show/' + this.id).then(function (response) {
-        _this.jobs = response.data;
-        console.log(_this.jobs);
+        _this.articles = response.data;
+        console.log(_this.articles);
       })["catch"](function (error) {
         _this.errors = error.response;
       });
@@ -1996,9 +1996,9 @@ __webpack_require__.r(__webpack_exports__);
         _this.form_submitting = false;
         _this.success = response.data.success;
       })["catch"](function (error) {
+        _this.form_submitting = false;
         _this.success = '';
         _this.errors = error.response.data;
-        console.log(_this.errors.message);
       });
     }
   }
@@ -2017,6 +2017,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+//
+//
+//
 //
 //
 //
@@ -37884,7 +37887,7 @@ var render = function() {
               "router-link",
               {
                 staticClass: "btn btn-primary m-4",
-                attrs: { to: "job/create" }
+                attrs: { to: "/job/create" }
               },
               [_vm._v("Create New job")]
             ),
@@ -37944,22 +37947,24 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "container" }, [
-    _c(
-      "div",
-      { staticClass: "row justify-content-center" },
-      _vm._l(this.jobs, function(job) {
-        return _c("div", { staticClass: "card" }, [
-          _c("div", { staticClass: "card-header" }, [
-            _vm._v(_vm._s(job.title))
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "card-body" }, [
-            _c("h4", [_vm._v(_vm._s(job.text))])
+    _c("div", { staticClass: "row justify-content-center" }, [
+      _c(
+        "div",
+        { staticClass: "col-md-8" },
+        _vm._l(this.articles, function(article) {
+          return _c("div", { staticClass: "card" }, [
+            _c("div", { staticClass: "card-header" }, [
+              _vm._v(_vm._s(article.title))
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "card-body" }, [
+              _c("h4", [_vm._v(_vm._s(article.text))])
+            ])
           ])
-        ])
-      }),
-      0
-    )
+        }),
+        0
+      )
+    ])
   ])
 }
 var staticRenderFns = []
@@ -38135,33 +38140,41 @@ var render = function() {
                       _vm._v(_vm._s(index))
                     ]),
                     _vm._v(" "),
-                    _c("td", [_vm._v(_vm._s(job.status))]),
+                    _c("td", [
+                      _vm._v(_vm._s(job.status == 1 ? "Sucessful" : "Failed"))
+                    ]),
                     _vm._v(" "),
-                    _c("td", [_vm._v(_vm._s(job.started_at))]),
+                    _c("td", [_vm._v(_vm._s(job.finished_at))]),
                     _vm._v(" "),
-                    _c(
-                      "td",
-                      [
-                        _c(
-                          "router-link",
-                          {
-                            staticClass: "btn btn-primary m-4",
-                            attrs: {
-                              to: {
-                                name: "article.show",
-                                params: { id: job.id }
-                              }
-                            }
-                          },
+                    job.status == 1
+                      ? _c(
+                          "td",
                           [
-                            _vm._v(
-                              "Chceck articles\n                                "
+                            _c(
+                              "router-link",
+                              {
+                                staticClass: "btn btn-primary btn-sm",
+                                attrs: {
+                                  to: {
+                                    name: "article.show",
+                                    params: { id: job.id }
+                                  }
+                                }
+                              },
+                              [
+                                _vm._v(
+                                  "Chceck articles\n                                "
+                                )
+                              ]
                             )
-                          ]
+                          ],
+                          1
                         )
-                      ],
-                      1
-                    )
+                      : _c("td", [
+                          _vm._v(
+                            "\n                                Job failed\n                            "
+                          )
+                        ])
                   ])
                 }),
                 0
@@ -38184,7 +38197,7 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("th", { attrs: { scope: "col" } }, [_vm._v("Status")]),
         _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("Started_at")]),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Finished at")]),
         _vm._v(" "),
         _c("th", { attrs: { scope: "col" } }, [_vm._v("Articles")])
       ])

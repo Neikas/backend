@@ -10,19 +10,22 @@
                             <tr>
                                 <th scope="col">#</th>
                                 <th scope="col">Status</th>
-                                <th scope="col">Started_at</th>
+                                <th scope="col">Finished at</th>
                                 <th scope="col">Articles</th>
                             </tr>
                             </thead>
                             <tbody>
                             <tr v-for="(job, index) in jobs">
                                 <th scope="row">{{ index }}</th>
-                                <td>{{ job.status }}</td>
-                                <td>{{ job.started_at }}</td>
-                                <td>
+                                <td>{{ job.status == 1 ? 'Sucessful': 'Failed'}}</td>
+                                <td>{{ job.finished_at }}</td>
+                                <td v-if="job.status == 1">
                                     <router-link :to="{name: 'article.show', params: {'id' : job.id } }"
-                                                 class="btn btn-primary m-4">Chceck articles
+                                                 class="btn btn-primary btn-sm">Chceck articles
                                     </router-link>
+                                </td>
+                                <td v-else>
+                                    Job failed
                                 </td>
                             </tr>
                             </tbody>
