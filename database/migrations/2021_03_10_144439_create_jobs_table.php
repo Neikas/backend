@@ -17,6 +17,7 @@ class CreateJobsTable extends Migration
             $table->id();
             $table->boolean('status')->default(false);
             $table->date('started_at')->nullable();
+            $table->foreignId('user_id');
             $table->timestamps();
         });
     }
