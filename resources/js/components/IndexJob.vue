@@ -10,6 +10,7 @@
                             <tr>
                                 <th scope="col">#</th>
                                 <th scope="col">Status</th>
+                                <th scope="col">Started_at</th>
                                 <th scope="col">Finished at</th>
                                 <th scope="col">Articles</th>
                             </tr>
@@ -17,16 +18,17 @@
                             <tbody>
                             <tr v-for="(job, index) in jobs">
                                 <th scope="row">{{ index }}</th>
-                                <td>{{ job.status == 1 ? 'Sucessful': 'Failed'}}</td>
+                                <td>{{ job.status }}</td>
+                                <td>{{ job.started_at }}</td>
                                 <td>{{ job.finished_at }}</td>
-                                <td v-if="job.status == 1">
+                                <td v-if="job.status == 'Done'">
                                     <router-link :to="{name: 'article.show', params: {'id' : job.id } }"
                                                  class="btn btn-primary btn-sm">
                                         <p class="text-dark">Chceck articles</p>
                                     </router-link>
                                 </td>
                                 <td v-else>
-                                    Job failed
+                                    Wait for execution
                                 </td>
                             </tr>
                             </tbody>
@@ -55,6 +57,7 @@ export default {
             axios.get('/api/job/index')
                 .then((response) => {
                     this.jobs = response.data.data;
+
                 }).catch((e) => {
 
             });

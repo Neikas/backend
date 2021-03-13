@@ -10,10 +10,10 @@ Frontend:
 
 Backend:
 
-1. Crawler works only when website url is storing. Job storing API should be responsible only for handling job
+- [x]  Crawler works only when website url is storing. Job storing API should be responsible only for handling job
    submission but not crawling.
-2. It would be nice that crawler would be able to crawl websites in background without frontend iteractions
-3. Crawler saves only one article. Websites may have one or more than one article so all of them should be saved.
-4. Why ScraperController has all the logic of scraping and is called from event? Maybe logic can be stored in the
+- [x]  It would be nice that crawler would be able to crawl websites in background without frontend iteractions
+- [x]  Crawler saves only one article. Websites may have one or more than one article so all of them should be saved.
+- [x]  Why ScraperController has all the logic of scraping and is called from event? Maybe logic can be stored in the
    service?
-5. Controllers/Api/ArticleController@index (line 19) - you don't need to select all articles twice.
+- [x]  Controllers/Api/ArticleController@index (line 19) - you don't need to select all articles twice.

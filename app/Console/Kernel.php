@@ -26,8 +26,7 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $crwlerJob =new CrawlerJob();
-        $schedule->job( new ProcessNewCrawlerJobs($crwlerJob))->everyMinute();
+        $schedule->job( new ProcessNewCrawlerJobs())->everyMinute();
         // $schedule->command('inspire')->hourly();
     }
 

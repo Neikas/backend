@@ -22,16 +22,16 @@ class JobController extends Controller
 
         return JobResource::collection($jobs);
     }
-
+    //for testing
     public function run()
     {
-        $crwlerJob =new CrawlerJob();
-        ProcessNewCrawlerJobs::dispatch( $crwlerJob );
+        $crwlerJob = new CrawlerJob();
+
+        ProcessNewCrawlerJobs::dispatch($crwlerJob);
     }
 
     public function store(JobRequest $request)
     {
-
         $crawlerJob = CrawlerJob::create();
 
         foreach ($request->urls as $url) {
@@ -39,8 +39,6 @@ class JobController extends Controller
                 'url' => $url
             ]);
         }
-
-        // event(new CreateNewJobForCrawlerEvent( $job ) );
 
         return response()->json(['success' => 'Job added to succesfully!']);
     }

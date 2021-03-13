@@ -11,31 +11,40 @@ class ScraperService
     /**
      * Make a call to to specified url and return formatted data
      *
-     * @param  string  $url
+     * @param $url
      *
-     * @return array
+     * @return Object
      */
     public function scrap($url)
     {
-        $paragraph = '';
-        $titles = '';
-        $success = true;
-        $failed = false;
+        $data = ( object ) [
+            'status' => true,
+            'title' => '',
+            'paragraph' => [],
+            'message' => ''
+        ];
+
         $client = new Client(HttpClient::create(['timeout' => 60]));
+
         try {
-            $crawler = $client->request('GET', $url);
+            $crawler = $client->request('GET', $url->url);
+
         } catch (\Exception $e) {
-            $failed = true;
-            return ( object ) ['failed' => $failed, 'message' => $e->getMessage()];
+
+            $data->status = false;
+            $data->errorMessage = $e->getMessage();
+
+            return $data;
         }
-        //Get the title of the website
-        $titles = $crawler->filter('title')->each(function ($node) {
-            return $node->text();
-        });
-        //Get p tag
+
+        $title = $crawler->filter('title')->first()->text();
         $paragraph = $crawler->filter('p')->each(function ($node) {
             return $node->text();
         });
-        return ( object ) ['success' => $success, 'data' => ['titles' => $titles, 'paragraph' => $paragraph]];
+
+        $data->title = $title;
+        $data->paragraph = $paragraph;
+
+        return $data;
     }
 }

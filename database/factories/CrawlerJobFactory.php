@@ -2,17 +2,17 @@
 
 namespace Database\Factories;
 
-use App\Models\Article;
+use App\Models\CrawlerJob;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class ArticleFactory extends Factory
+class CrawlerJobFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = Article::class;
+    protected $model = CrawlerJob::class;
 
     /**
      * Define the model's default state.
@@ -22,8 +22,7 @@ class ArticleFactory extends Factory
     public function definition()
     {
         return [
-            'title' => $this->faker->title,
-            'text' => $this->faker->paragraph,
+
         ];
     }
 }

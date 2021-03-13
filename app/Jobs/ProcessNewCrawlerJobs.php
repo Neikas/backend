@@ -3,7 +3,7 @@
 namespace App\Jobs;
 
 use App\Models\CrawlerJob;
-use App\Services\ScraperService;
+use App\Services\UrlService;
 use Carbon\Carbon;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -11,51 +11,32 @@ use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 
-class ProcessNewCrawlerJobs
+class ProcessNewCrawlerJobs implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
-
-    protected $crwlerJob;
-    /**
-     * Create a new job instance.
-     *
-     * @return void
-     */
-    public function __construct( CrawlerJob $crawlerJob)
-    {
-
-        $this->crwlerJob = $crawlerJob;
-    }
 
     /**
      * Execute the job.
      *
      * @return void
      */
-    public function handle(ScraperService $scraperService)
+    public function handle()
     {
-        $jobs = $this->crwlerJob->where('status', 0)->get();
+        $crawlerJob = new CrawlerJob();
 
-        foreach ($jobs as $job){
-            $this->crwlerJob->findOrfail($job->id)->update(['started_at'=> Carbon::now()]);
-            foreach ($job->urls as $url){
-                $data = $scraperService->scrap($url->url);
+        $jobs = $crawlerJob->where('status', 'pending')->get();
 
-                if(isset($data->success) ) {
-                    $title = $data->data['titles'][0];
-                    foreach ($data->data['paragraph'] as $paragraph){
+        foreach ($jobs as $job) {
 
-                        $url->articles()->create([
-                            'title' => $title,
-                            'text' => $paragraph,
-                        ]);
-                    }
-                }else{
-                    $url->update([ 'status' => true ]);
-                }
-            }
-            $this->crwlerJob->findOrfail($job->id)->update(['finished_at'=> Carbon::now()]);
-            $this->crwlerJob->findOrfail($job->id)->update(['status'=> true]);
+            $job->update(['started_at' => Carbon::now()]);
+
+            // Process url
+            $urlServices = new UrlService();
+            $urlServices->processUrls($job->urls()->get());
+
+            $job->update(['finished_at' => Carbon::now()]);
+
+            $job->update(['status' => 'Done']);
         }
     }
 }

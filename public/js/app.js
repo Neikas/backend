@@ -1905,12 +1905,25 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
       'id': this.$route.params.id,
-      'articles': {},
-      'errors': {}
+      'urls': {},
+      'errors': {},
+      'greenBar': 0,
+      'redBar': 0
     };
   },
   mounted: function mounted() {
@@ -1921,11 +1934,21 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       axios.get('/api/articles/show/' + this.id).then(function (response) {
-        _this.articles = response.data;
-        console.log(_this.articles);
+        _this.urls = response.data.data;
+
+        _this.calculateFailedUrl();
       })["catch"](function (error) {
         _this.errors = error.response;
       });
+    },
+    calculateFailedUrl: function calculateFailedUrl() {
+      var success = 0;
+      this.urls.map(function (index) {
+        if (index.status == 1) success++;
+      });
+      this.greenBar = success / this.urls.length * 100;
+      this.redBar = 100 - this.greenBar;
+      console.log(this.greenBar + ' ' + this.redBar);
     }
   }
 });
@@ -2032,6 +2055,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+//
+//
 //
 //
 //
@@ -38437,26 +38462,79 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "container" }, [
-    _c("div", { staticClass: "row justify-content-center" }, [
-      _c(
-        "div",
-        { staticClass: "col-md-8" },
-        _vm._l(this.articles, function(article) {
-          return _c("div", { staticClass: "card" }, [
-            _c("div", { staticClass: "card-header" }, [
-              _vm._v(_vm._s(article.title))
+  return _c(
+    "div",
+    { staticClass: "container" },
+    [
+      _c("div", { staticClass: "progress" }, [
+        _c("div", {
+          staticClass:
+            "progress-bar progress-bar-striped progress-bar-animated",
+          style: { width: _vm.greenBar + "%" },
+          attrs: {
+            role: "progressbar",
+            "aria-valuenow": "75",
+            "aria-valuemin": "0",
+            "aria-valuemax": "100"
+          }
+        }),
+        _vm._v(" "),
+        _c("div", {
+          staticClass: "progress-bar bg-danger",
+          style: { width: _vm.redBar + "%" },
+          attrs: {
+            role: "progressbar",
+            "aria-valuenow": "25",
+            "aria-valuemin": "0",
+            "aria-valuemax": "100"
+          }
+        })
+      ]),
+      _vm._v(" "),
+      _vm._l(_vm.urls, function(url) {
+        return _c(
+          "div",
+          { staticClass: "row" },
+          [
+            _c("div", { staticClass: "col-sm-12 text-center m-1" }, [
+              _c("h4", [_vm._v(_vm._s(url.url))])
             ]),
             _vm._v(" "),
-            _c("div", { staticClass: "card-body" }, [
-              _c("h4", [_vm._v(_vm._s(article.text))])
-            ])
-          ])
-        }),
-        0
-      )
-    ])
-  ])
+            _vm._l(url.articles, function(article) {
+              return _c("div", { staticClass: "col-sm-4" }, [
+                _c(
+                  "div",
+                  {
+                    staticClass: "card m-2",
+                    class: { "bg-danger": article.status == 0 }
+                  },
+                  [
+                    _c("div", { staticClass: "card-body" }, [
+                      _c("h5", { staticClass: "card-title" }, [
+                        _vm._v(
+                          _vm._s(
+                            article.title == ""
+                              ? "Website title empty"
+                              : article.title
+                          )
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("p", { staticClass: "card-text" }, [
+                        _vm._v(_vm._s(article.text))
+                      ])
+                    ])
+                  ]
+                )
+              ])
+            })
+          ],
+          2
+        )
+      })
+    ],
+    2
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -38614,13 +38692,13 @@ var render = function() {
                       _vm._v(_vm._s(index))
                     ]),
                     _vm._v(" "),
-                    _c("td", [
-                      _vm._v(_vm._s(job.status == 1 ? "Sucessful" : "Failed"))
-                    ]),
+                    _c("td", [_vm._v(_vm._s(job.status))]),
+                    _vm._v(" "),
+                    _c("td", [_vm._v(_vm._s(job.started_at))]),
                     _vm._v(" "),
                     _c("td", [_vm._v(_vm._s(job.finished_at))]),
                     _vm._v(" "),
-                    job.status == 1
+                    job.status == "Done"
                       ? _c(
                           "td",
                           [
@@ -38646,7 +38724,7 @@ var render = function() {
                         )
                       : _c("td", [
                           _vm._v(
-                            "\n                                Job failed\n                            "
+                            "\n                                Wait for execution\n                            "
                           )
                         ])
                   ])
@@ -38670,6 +38748,8 @@ var staticRenderFns = [
         _c("th", { attrs: { scope: "col" } }, [_vm._v("#")]),
         _vm._v(" "),
         _c("th", { attrs: { scope: "col" } }, [_vm._v("Status")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Started_at")]),
         _vm._v(" "),
         _c("th", { attrs: { scope: "col" } }, [_vm._v("Finished at")]),
         _vm._v(" "),

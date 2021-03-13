@@ -22,8 +22,7 @@ class UrlFactory extends Factory
     public function definition()
     {
         return [
-            'name' => $this->faker->url,
-            'status' => $this->faker->boolean(),
+
         ];
     }
 }

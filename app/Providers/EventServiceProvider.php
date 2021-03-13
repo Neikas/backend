@@ -17,10 +17,7 @@ class EventServiceProvider extends ServiceProvider
      * @var array
      */
     protected $listen = [
-        CreateNewJobForCrawlerEvent::class => [
-            AddJobToCralwerListener::class
 
-        ],
     ];
 
     /**

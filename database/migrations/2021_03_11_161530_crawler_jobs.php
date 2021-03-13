@@ -15,7 +15,7 @@ class CrawlerJobs extends Migration
     {
         Schema::create('crawler_jobs', function (Blueprint $table) {
             $table->id();
-            $table->boolean('status')->default(false);
+            $table->string('status')->default('pending');
             $table->timestamp('finished_at')->nullable();
             $table->timestamp('started_at')->nullable();
             $table->timestamps();
