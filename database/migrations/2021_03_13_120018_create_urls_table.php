@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CrawlerJobs extends Migration
+class CreateUrlsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,12 @@ class CrawlerJobs extends Migration
      */
     public function up()
     {
-        Schema::create('crawler_jobs', function (Blueprint $table) {
+        Schema::create('urls', function (Blueprint $table) {
             $table->id();
+            $table->string('url');
             $table->boolean('status')->default(false);
-            $table->timestamp('finished_at')->nullable();
-            $table->timestamp('started_at')->nullable();
+            $table->foreignId('crawler_job_id');
             $table->timestamps();
-
         });
     }
 
@@ -30,6 +29,6 @@ class CrawlerJobs extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('urls');
     }
 }

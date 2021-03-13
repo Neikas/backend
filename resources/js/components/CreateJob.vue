@@ -14,17 +14,23 @@
                         <div v-if="success" class="alert alert-success">
                             {{ success }}
                         </div>
-                        <form @submit.prevent="submit_form()">
-                            <label for="basic-url">Your vanity URL</label>
-                            <div class="input-group mb-3">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text" id="basic-addon3">https://example.com/users/</span>
+
+                        <label>Your vanity URL</label>
+                        <div class="input-group mb-3">
+                            <div class="d-inline">
+                                <div class="input-group-prepend mr-2">
+                                    <span class="input-group-text" id="basic-addon3">https://www.google.lt</span>
                                 </div>
-                                <input type="text" v-model="fields.urls" class="form-control" id="basic-url"
-                                       aria-describedby="basic-addon3">
+                                <div class="input-group-prepend">
+                                    <md-chips v-model="fields.urls" md-placeholder="Add URLS"></md-chips>
+                                </div>
                             </div>
-                            <button :disabled="form_submitting" type="submit" class="btn btn-primary">Submit</button>
-                        </form>
+                            <div class="d-inline">
+                                <div class="form-group">
+                                    <button class="btn btn-primary" v-on:click="submit_form">Add new job</button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -38,28 +44,33 @@ export default {
         return {
             form_submitting: false,
             fields: {
-                'urls': ''
+                'urls': [],
             },
             success: '',
             errors: {
-                'urls': ''
+                'urls': '',
+                'message': '',
             },
         }
     },
     mounted() {
     },
+
     methods: {
         submit_form() {
             this.form_submitting = true;
-            axios.post('http://backend.test/api/job/store', this.fields)
+            axios.post('/api/job/store', this.fields)
                 .then((response) => {
                     this.form_submitting = false;
                     this.success = response.data.success;
+                    this.errors = {
+                        'urls': '',
+                        'message': '',
+                    }
                 }).catch((error) => {
                 this.form_submitting = false;
                 this.success = '';
                 this.errors = error.response.data;
-
             });
         }
     }

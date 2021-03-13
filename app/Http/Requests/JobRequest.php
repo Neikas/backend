@@ -24,7 +24,11 @@ class JobRequest extends FormRequest
     public function rules()
     {
         return [
-            'urls' => 'required|url'
+            'urls' => 'array|required',
+            'urls.*' => [
+                'required',
+                'url',
+            ],
         ];
     }
 }

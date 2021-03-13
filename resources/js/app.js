@@ -16,10 +16,13 @@ import VueRouter from "vue-router";
 import CreateJob from './components/CreateJob';
 import IndexJob from "./components/IndexJob";
 import Article from "./components/Article";
-
+import { MdChips } from 'vue-material/dist/components';
+import 'vue-material/dist/vue-material.min.css';
+import 'vue-material/dist/theme/default.css';
 const App = Vue.component('app', require('./App.vue').default);
 
 Vue.use(VueRouter);
+Vue.use(MdChips);
 
 const router = new VueRouter({
     mode: 'history',

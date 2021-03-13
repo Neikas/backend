@@ -13,9 +13,11 @@ class CrawlerJob extends Model
         'url',
         'status',
         'finished_at',
+        'started_at',
     ];
-    public function articles()
+
+    public function urls()
     {
-        return $this->hasMany(Article::class, 'job_id');
+        return $this->hasMany(Url::class, 'crawler_job_id');
     }
 }

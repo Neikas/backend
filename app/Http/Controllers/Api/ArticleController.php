@@ -16,7 +16,6 @@ class ArticleController extends Controller
      */
     public function index()
     {
-        Article::all();
 
         return response()->json([Article::all()]);
     }

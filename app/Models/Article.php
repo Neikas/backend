@@ -12,6 +12,6 @@ class Article  extends Model
     protected $fillable = [
         'title',
         'text',
-        'job_id'
+        'url_id',
     ];
 }

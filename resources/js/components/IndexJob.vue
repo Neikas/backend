@@ -21,7 +21,8 @@
                                 <td>{{ job.finished_at }}</td>
                                 <td v-if="job.status == 1">
                                     <router-link :to="{name: 'article.show', params: {'id' : job.id } }"
-                                                 class="btn btn-primary btn-sm">Chceck articles
+                                                 class="btn btn-primary btn-sm">
+                                        <p class="text-dark">Chceck articles</p>
                                     </router-link>
                                 </td>
                                 <td v-else>
@@ -51,7 +52,7 @@ export default {
     },
     methods: {
         get_jobs() {
-            axios.get('http://backend.test/api/job/index')
+            axios.get('/api/job/index')
                 .then((response) => {
                     this.jobs = response.data.data;
                 }).catch((e) => {

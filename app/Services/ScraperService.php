@@ -17,14 +17,16 @@ class ScraperService
      */
     public function scrap($url)
     {
-
+        $paragraph = '';
+        $titles = '';
+        $success = true;
+        $failed = false;
         $client = new Client(HttpClient::create(['timeout' => 60]));
-
         try {
             $crawler = $client->request('GET', $url);
         } catch (\Exception $e) {
-
-            return ['failed' => true, 'message' => $e->getMessage()];
+            $failed = true;
+            return ( object ) ['failed' => $failed, 'message' => $e->getMessage()];
         }
         //Get the title of the website
         $titles = $crawler->filter('title')->each(function ($node) {
@@ -34,7 +36,6 @@ class ScraperService
         $paragraph = $crawler->filter('p')->each(function ($node) {
             return $node->text();
         });
-
-        return ( object ) ['title' => $titles[0], 'paragraph' => $paragraph[0]];
+        return ( object ) ['success' => $success, 'data' => ['titles' => $titles, 'paragraph' => $paragraph]];
     }
 }

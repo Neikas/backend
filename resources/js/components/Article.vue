@@ -27,7 +27,7 @@ export default {
     },
     methods: {
         get_articles() {
-            axios.get('http://backend.test/api/articles/show/' + this.id)
+            axios.get('/api/articles/show/' + this.id)
                 .then((response) => {
                     this.articles = response.data;
                     console.log(this.articles);

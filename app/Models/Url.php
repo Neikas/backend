@@ -8,14 +8,15 @@ use Illuminate\Database\Eloquent\Model;
 class Url extends Model
 {
     use HasFactory;
-    protected $fillable =[
-        'name',
+
+    protected $fillable = [
+        'url',
         'status',
         'crawler_job_id'
     ];
 
     public function articles()
     {
-        return $this->hasMany(Article::class);
+        return $this->hasMany(Article::class, 'url_id');
     }
 }

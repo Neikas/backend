@@ -12,7 +12,9 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('/CrawlWebsites', [\App\Http\Controllers\Api\JobController::class, 'run']);
 Route::view('/{any}', 'layouts.app')->where('any', '.*');
+
 //Route::get('test', [\App\Http\Controllers\ScraperController::class, 'index']);
 Auth::routes();
 

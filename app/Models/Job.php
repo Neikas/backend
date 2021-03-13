@@ -8,7 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Job extends Model
 {
     protected $fillable = [
-        'status', 'started_at'
+        'status',
+        'started_at'
     ];
 
     use HasFactory;
