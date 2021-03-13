@@ -60,7 +60,8 @@
                 "issues": "https://github.com/asm89/stack-cors/issues",
                 "source": "https://github.com/asm89/stack-cors/tree/v2.0.3"
             },
-            "time": "2021-03-11T06:42:03+00:00"
+            "time": "2021-03-11T06:42:03+00:00",
+
         },
         {
             "name": "brick/math",

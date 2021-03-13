@@ -18,10 +18,11 @@ class JobController extends Controller
      */
     public function index()
     {
-        $jobs = CrawlerJob::all();
+        $jobs = CrawlerJob::orderBy('started_at', 'DESC')->get();
 
         return JobResource::collection($jobs);
     }
+
     //for testing
     public function run()
     {
@@ -40,19 +41,35 @@ class JobController extends Controller
             ]);
         }
 
-        return response()->json(['success' => 'Job added to succesfully!']);
+        return response()->json([
+            'success' => 'Job added to succesfully!',
+            'id' => $crawlerJob->id
+        ])->setStatusCode(202);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Job  $job
+     * @param  \App\Models\CrawlerJob  $crawlerJob
      * @return \Illuminate\Http\Response
      */
-    public function status(Job $job)
+    public function status(CrawlerJob $crawlerJob)
     {
+        $urls = $crawlerJob->urls()->get();
 
-        return response()->json(['status' => $job->status]);
+        $countFalse = $urls->countBy(function($url){
+            return $url->status == false;
+        })->first() ;
+        $urlCount = $urls->count();
+
+        if($countFalse == 0  ){
+
+            $precentage = 100;
+        }else {
+            $precentage = ($countFalse / $urlCount) * 100;
+        }
+
+        return response()->json(['status' => $crawlerJob->status, 'percentage' =>$precentage ]);
     }
 
 }

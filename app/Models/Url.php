@@ -12,7 +12,7 @@ class Url extends Model
     protected $fillable = [
         'url',
         'status',
-        'crawler_job_id'
+        'crawler_job_id',
     ];
 
     public function articles()
