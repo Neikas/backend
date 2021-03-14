@@ -10,6 +10,7 @@
                             <tr>
                                 <th scope="col">#</th>
                                 <th scope="col">Status</th>
+                                <th scope="col">Percentage</th>
                                 <th scope="col">Started_at</th>
                                 <th scope="col">Finished at</th>
                                 <th scope="col">Articles</th>
@@ -19,6 +20,14 @@
                             <tr v-for="(job, index) in jobs">
                                 <th scope="row">{{ index }}</th>
                                 <td>{{ job.status }}</td>
+                                <td>
+                                    <div class="progress" v>
+                                        <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75"
+                                             aria-valuemin="0" aria-valuemax="100" v-bind:style="{'width' : ( job.percentage +'%' )}">
+                                            {{ job.percentage }}
+                                        </div>
+                                    </div>
+                                </td>
                                 <td>{{ job.started_at }}</td>
                                 <td>{{ job.finished_at }}</td>
                                 <td v-if="job.status == 'Done'">
@@ -46,6 +55,7 @@ export default {
         return {
             jobs: {},
             article_url: this.article,
+            toggle: false,
         };
     },
     mounted() {
@@ -57,11 +67,11 @@ export default {
             axios.get('/api/job/index')
                 .then((response) => {
                     this.jobs = response.data.data;
-
+                    console.log(this.jobs );
                 }).catch((e) => {
 
             });
-        }
+        },
     }
 }
 </script>

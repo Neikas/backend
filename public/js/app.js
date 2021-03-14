@@ -2097,11 +2097,21 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
       jobs: {},
-      article_url: this.article
+      article_url: this.article,
+      toggle: false
     };
   },
   mounted: function mounted() {
@@ -2113,6 +2123,7 @@ __webpack_require__.r(__webpack_exports__);
 
       axios.get('/api/job/index').then(function (response) {
         _this.jobs = response.data.data;
+        console.log(_this.jobs);
       })["catch"](function (e) {});
     }
   }
@@ -38694,6 +38705,32 @@ var render = function() {
                     _vm._v(" "),
                     _c("td", [_vm._v(_vm._s(job.status))]),
                     _vm._v(" "),
+                    _c("td", [
+                      _c("div", { staticClass: "progress", attrs: { v: "" } }, [
+                        _c(
+                          "div",
+                          {
+                            staticClass:
+                              "progress-bar progress-bar-striped progress-bar-animated",
+                            style: { width: job.percentage + "%" },
+                            attrs: {
+                              role: "progressbar",
+                              "aria-valuenow": "75",
+                              "aria-valuemin": "0",
+                              "aria-valuemax": "100"
+                            }
+                          },
+                          [
+                            _vm._v(
+                              "\n                                        " +
+                                _vm._s(job.percentage) +
+                                "\n                                    "
+                            )
+                          ]
+                        )
+                      ])
+                    ]),
+                    _vm._v(" "),
                     _c("td", [_vm._v(_vm._s(job.started_at))]),
                     _vm._v(" "),
                     _c("td", [_vm._v(_vm._s(job.finished_at))]),
@@ -38748,6 +38785,8 @@ var staticRenderFns = [
         _c("th", { attrs: { scope: "col" } }, [_vm._v("#")]),
         _vm._v(" "),
         _c("th", { attrs: { scope: "col" } }, [_vm._v("Status")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Percentage")]),
         _vm._v(" "),
         _c("th", { attrs: { scope: "col" } }, [_vm._v("Started_at")]),
         _vm._v(" "),

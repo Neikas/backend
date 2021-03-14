@@ -19,6 +19,9 @@ class JobResource extends JsonResource
             'status' => $this->status,
             'finished_at' => $this->finished_at,
             'started_at' => $this->started_at,
+            'percentage' => $this->urls->avg(function ($url) {
+                    return $url->status == true;
+                }) * 100,
         ];
     }
 }

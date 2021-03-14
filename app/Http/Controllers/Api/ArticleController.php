@@ -12,7 +12,7 @@ class ArticleController extends Controller
      * Display the specified resource.
      *
      * @param  $id
-     * @return \Illuminate\Http\Resources\Json\AnonymousResourceCollection
+
      */
     public function show($id)
     {

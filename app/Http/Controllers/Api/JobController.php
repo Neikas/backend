@@ -7,18 +7,16 @@ use App\Http\Requests\JobRequest;
 use App\Http\Resources\JobResource;
 use App\Jobs\ProcessNewCrawlerJobs;
 use App\Models\CrawlerJob;
-use App\Models\Job;
 
 class JobController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        $jobs = CrawlerJob::orderBy('started_at', 'DESC')->get();
+        $jobs = CrawlerJob::orderBy('started_at', 'DESC')->with('urls')->get();
 
         return JobResource::collection($jobs);
     }
@@ -48,28 +46,31 @@ class JobController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * Return status and percentage of completion
      *
      * @param  \App\Models\CrawlerJob  $crawlerJob
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function status(CrawlerJob $crawlerJob)
     {
         $urls = $crawlerJob->urls()->get();
+        $percentage = $urls->avg(function ($url) {
+                return $url->status == true;
+            }) * 100;
 
-        $countFalse = $urls->countBy(function($url){
-            return $url->status == false;
-        })->first() ;
+        $urlCompleted = $urls->filter(function ($url) {
+            return $url->status == true;
+        })->count();
+
         $urlCount = $urls->count();
 
-        if($countFalse == 0  ){
-
-            $precentage = 100;
-        }else {
-            $precentage = ($countFalse / $urlCount) * 100;
-        }
-
-        return response()->json(['status' => $crawlerJob->status, 'percentage' =>$precentage ]);
+        return response()->json([
+            'status' => $crawlerJob->status,
+            'percentage' => $percentage,
+            'urlCount' => $urlCount,
+            'urlCompleted' => $urlCompleted,
+        ]);
     }
+
 
 }

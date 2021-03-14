@@ -3,7 +3,6 @@
 namespace App\Console;
 
 use App\Jobs\ProcessNewCrawlerJobs;
-use App\Models\CrawlerJob;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -26,8 +25,7 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->job( new ProcessNewCrawlerJobs())->everyMinute();
-        // $schedule->command('inspire')->hourly();
+        $schedule->job(new ProcessNewCrawlerJobs())->everyMinute();
     }
 
     /**
