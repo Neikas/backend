@@ -15,23 +15,24 @@
                             {{ success }}
                         </div>
 
-                        <label>Url must be same as in Google example!</label>
-                        <div class="input-group mb-3">
-                            <div class="d-inline">
-                                <div class="input-group-prepend mr-2">
+                        <p class="text-center">Url must be same as in Google example!</p>
+                        <div class="form-group">
+                            <div class="col-sm-12">
                                     <span class="input-group-text" id="basic-addon3">https://www.google.lt</span>
-                                </div>
-                                <div class="input-group-prepend">
-                                    <md-chips v-model="fields.urls" md-placeholder="Insert URL press enter"></md-chips>
-                                </div>
-                            </div>
-                            <div class="d-inline">
-                                <div class="form-group">
-                                    <button class="btn btn-primary" v-on:click="submit_form">Add new job</button>
-                                    <button class="btn btn-primary" v-on:click="insert_news_portals">URLs for test</button>
-                                </div>
                             </div>
                         </div>
+                        <div class="form-group">
+                            <div class="col-sm-12">
+                                <md-chips v-model="fields.urls" md-placeholder="Insert URL here and press enter"></md-chips>
+                            </div>
+                        </div>
+                            <div class="d-inline">
+                                <div class="form-group">
+                                    <button class="btn btn-primary btn-block" v-on:click="submit_form">Add new job</button>
+                                    <button class="btn btn-primary btn-block" v-on:click="insert_news_portals">URLs for test</button>
+                                </div>
+                            </div>
+
                     </div>
                 </div>
             </div>
@@ -77,8 +78,7 @@ export default {
         insert_news_portals()
         {
             var newProtals = [
-                'https://www.delfi.lt/', 'https://www.delfi.lt/',
-                'https://www.supermama.lt/', 'https://www.skelbiu.lt',
+                'https://www.delfi.lt/', 'https://www.supermama.lt/', 'https://www.skelbiu.lt',
                 'https://www.plius.lt', 'https://www.lrs.lt', 'https://www.vz.lt/',
                 'https://www.delfi.lt/krepsinis/', 'https://www.15min.lt/',
                 'http://www.ltv.lt/ziniasklaida/', 'https://www.lrt.lt/',

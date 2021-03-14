@@ -8,7 +8,7 @@
                  aria-valuenow="25"
                  aria-valuemin="0" aria-valuemax="100"></div>
         </div>
-        <div class="row" v-for="url in urls">
+        <div class="row" v-for="url in urls">xw
             <div class="col-sm-12 text-center m-1">
                 <h4>{{ url.url }}</h4>
             </div>
