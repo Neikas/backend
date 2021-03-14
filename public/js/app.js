@@ -1948,7 +1948,6 @@ __webpack_require__.r(__webpack_exports__);
       });
       this.greenBar = success / this.urls.length * 100;
       this.redBar = 100 - this.greenBar;
-      console.log(this.greenBar + ' ' + this.redBar);
     }
   }
 });
@@ -2129,8 +2128,9 @@ __webpack_require__.r(__webpack_exports__);
 
       axios.get('/api/job/index').then(function (response) {
         _this.jobs = response.data.data;
-        console.log(_this.jobs);
-      })["catch"](function (e) {});
+      })["catch"](function (e) {
+        alert(e);
+      });
     }
   }
 });
@@ -2158,9 +2158,7 @@ __webpack_require__.r(__webpack_exports__);
  * includes Vue and other libraries. It is a great starting point when
  * building robust, powerful web applications using Vue and Laravel.
  */
-__webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js"); // const files = require.context('./', true, /\.vue$/i)
-// files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
-
+__webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js").default;
 
@@ -38513,7 +38511,6 @@ var render = function() {
           "div",
           { staticClass: "row" },
           [
-            _vm._v("xw\n        "),
             _c("div", { staticClass: "col-sm-12 text-center m-1" }, [
               _c("h4", [_vm._v(_vm._s(url.url))])
             ]),

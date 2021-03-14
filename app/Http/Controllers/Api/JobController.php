@@ -20,15 +20,10 @@ class JobController extends Controller
 
         return JobResource::collection($jobs);
     }
-
-    //for testing
-    public function run()
-    {
-        $crwlerJob = new CrawlerJob();
-
-        ProcessNewCrawlerJobs::dispatch($crwlerJob);
-    }
-
+    /**
+     * Store new job
+     *
+     */
     public function store(JobRequest $request)
     {
         $crawlerJob = CrawlerJob::create();

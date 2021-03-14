@@ -67,9 +67,8 @@ export default {
             axios.get('/api/job/index')
                 .then((response) => {
                     this.jobs = response.data.data;
-                    console.log(this.jobs );
                 }).catch((e) => {
-
+                alert(e);
             });
         },
     }

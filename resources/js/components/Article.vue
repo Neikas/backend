@@ -8,7 +8,7 @@
                  aria-valuenow="25"
                  aria-valuemin="0" aria-valuemax="100"></div>
         </div>
-        <div class="row" v-for="url in urls">xw
+        <div class="row" v-for="url in urls">
             <div class="col-sm-12 text-center m-1">
                 <h4>{{ url.url }}</h4>
             </div>
@@ -46,7 +46,6 @@ export default {
                     this.urls = response.data.data;
                     this.calculateFailedUrl();
                 }).catch((error) => {
-
                 this.errors = error.response;
             });
         },
@@ -55,11 +54,8 @@ export default {
             this.urls.map(index => {
                 if (index.status == 1) success++;
             });
-
             this.greenBar = (success / this.urls.length) * 100;
             this.redBar = 100 - this.greenBar;
-            console.log(this.greenBar + ' ' + this.redBar);
-
         }
 
     }
