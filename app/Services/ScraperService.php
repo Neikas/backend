@@ -19,16 +19,16 @@ class ScraperService
     {
         $data = ( object ) [
             'status' => true,
-            'title' => '',
-            'paragraph' => [],
+            'title' => 'Title not found',
+            'paragraph' => [
+                'Failed scraping any paragraph tags'
+            ],
             'message' => ''
         ];
 
         $client = new Client(HttpClient::create(['timeout' => 60]));
-
         try {
             $crawler = $client->request('GET', $url->url);
-
         } catch (\Exception $e) {
 
             $data->status = false;
@@ -36,14 +36,18 @@ class ScraperService
 
             return $data;
         }
+        //Handles empty
+        if(!$crawler->filter('title')->count() == 0 )
+        {
+            $data->title = $crawler->filter('title')->first()->text();
+        }
 
-        $title = $crawler->filter('title')->first()->text();
-        $paragraph = $crawler->filter('p')->each(function ($node) {
-            return $node->text();
-        });
-
-        $data->title = $title;
-        $data->paragraph = $paragraph;
+        if(!$crawler->filter('p')->count() == 0 )
+        {
+            $data->paragraph = $crawler->filter('p')->each(function ($node) {
+                return $node->text();
+            });
+        }
 
         return $data;
     }

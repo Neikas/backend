@@ -2006,6 +2006,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -2038,6 +2039,10 @@ __webpack_require__.r(__webpack_exports__);
         _this.success = '';
         _this.errors = error.response.data;
       });
+    },
+    insert_news_portals: function insert_news_portals() {
+      var newProtals = ['https://www.delfi.lt/', 'https://www.delfi.lt/', 'https://www.supermama.lt/', 'https://www.skelbiu.lt', 'https://www.plius.lt', 'https://www.lrs.lt', 'https://www.vz.lt/', 'https://www.delfi.lt/krepsinis/', 'https://www.15min.lt/', 'http://www.ltv.lt/ziniasklaida/', 'https://www.lrt.lt/', 'https://www.alfa.lt/', 'https://www.m-1.fm/', 'https://laikas.tv3.lt/', 'https://www.lietus.fm/', 'https://alkas.lt/', 'https://www.delfi.lt/orai/', 'https://www.delfi.lt/horoskopai/', 'https://www.delfi.lt/news/daily/crime/', 'https://www.delfi.lt/seima/', 'https://alytausgidas.lt/', 'https://bbc.co.uk', 'https://edition.cnn.com/', 'https://www.nytimes.com/', 'https://www.delfi.lt/verslas/', 'https://www.delfi.lt/mokslas/', 'http://www.technologijos.lt/', 'http://www.technologijos.lt/laisvalaikis', 'http://www.technologijos.lt/laisvalaikis/sventes', 'http://www.technologijos.lt/diskusijos/'];
+      this.fields.urls = newProtals;
     }
   }
 });
@@ -38603,7 +38608,7 @@ var render = function() {
                 ])
               : _vm._e(),
             _vm._v(" "),
-            _c("label", [_vm._v("Your vanity URL")]),
+            _c("label", [_vm._v("Url must be same as in Google example!")]),
             _vm._v(" "),
             _c("div", { staticClass: "input-group mb-3" }, [
               _c("div", { staticClass: "d-inline" }, [
@@ -38614,7 +38619,7 @@ var render = function() {
                   { staticClass: "input-group-prepend" },
                   [
                     _c("md-chips", {
-                      attrs: { "md-placeholder": "Add URLS" },
+                      attrs: { "md-placeholder": "Insert URL press enter" },
                       model: {
                         value: _vm.fields.urls,
                         callback: function($$v) {
@@ -38637,6 +38642,15 @@ var render = function() {
                       on: { click: _vm.submit_form }
                     },
                     [_vm._v("Add new job")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-primary",
+                      on: { click: _vm.insert_news_portals }
+                    },
+                    [_vm._v("URLs for test")]
                   )
                 ])
               ])

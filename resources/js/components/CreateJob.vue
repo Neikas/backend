@@ -15,19 +15,20 @@
                             {{ success }}
                         </div>
 
-                        <label>Your vanity URL</label>
+                        <label>Url must be same as in Google example!</label>
                         <div class="input-group mb-3">
                             <div class="d-inline">
                                 <div class="input-group-prepend mr-2">
                                     <span class="input-group-text" id="basic-addon3">https://www.google.lt</span>
                                 </div>
                                 <div class="input-group-prepend">
-                                    <md-chips v-model="fields.urls" md-placeholder="Add URLS"></md-chips>
+                                    <md-chips v-model="fields.urls" md-placeholder="Insert URL press enter"></md-chips>
                                 </div>
                             </div>
                             <div class="d-inline">
                                 <div class="form-group">
                                     <button class="btn btn-primary" v-on:click="submit_form">Add new job</button>
+                                    <button class="btn btn-primary" v-on:click="insert_news_portals">URLs for test</button>
                                 </div>
                             </div>
                         </div>
@@ -54,8 +55,8 @@ export default {
         }
     },
     mounted() {
-    },
 
+    },
     methods: {
         submit_form() {
             this.form_submitting = true;
@@ -72,6 +73,25 @@ export default {
                 this.success = '';
                 this.errors = error.response.data;
             });
+        },
+        insert_news_portals()
+        {
+            var newProtals = [
+                'https://www.delfi.lt/', 'https://www.delfi.lt/',
+                'https://www.supermama.lt/', 'https://www.skelbiu.lt',
+                'https://www.plius.lt', 'https://www.lrs.lt', 'https://www.vz.lt/',
+                'https://www.delfi.lt/krepsinis/', 'https://www.15min.lt/',
+                'http://www.ltv.lt/ziniasklaida/', 'https://www.lrt.lt/',
+                'https://www.alfa.lt/', 'https://www.m-1.fm/', 'https://laikas.tv3.lt/',
+                'https://www.lietus.fm/', 'https://alkas.lt/', 'https://www.delfi.lt/orai/',
+                'https://www.delfi.lt/horoskopai/', 'https://www.delfi.lt/news/daily/crime/',
+                'https://www.delfi.lt/seima/', 'https://alytausgidas.lt/', 'https://bbc.co.uk',
+                'https://edition.cnn.com/', 'https://www.nytimes.com/', 'https://www.delfi.lt/verslas/',
+                'https://www.delfi.lt/mokslas/', 'http://www.technologijos.lt/',
+                'http://www.technologijos.lt/laisvalaikis', 'http://www.technologijos.lt/laisvalaikis/sventes',
+                'http://www.technologijos.lt/diskusijos/',
+            ];
+            this.fields.urls = newProtals;
         }
     }
 }

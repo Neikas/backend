@@ -10,7 +10,7 @@ class ArticleService
     public function storeArticles(Url $url, $data)
     {
         $url->update([
-            'status' => $data->status
+            'status' => true
         ]);
 
         foreach ($data->paragraph as $paragraph) {
@@ -29,7 +29,7 @@ class ArticleService
         }
 
         $url->update([
-            'status' => $data->status
+            'status' => true
         ]);
 
         $url->articles()->create([
