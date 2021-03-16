@@ -30,6 +30,7 @@ class CrawlerJobs extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('crawler_jobs');
+
     }
 }

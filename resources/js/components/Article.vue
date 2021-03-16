@@ -15,7 +15,7 @@
             <div class="col-sm-4" v-for="article in url.articles">
                 <div class="card m-2" v-bind:class="{ 'bg-danger': (article.status == 0) }">
                     <div class="card-body">
-                        <h5 class="card-title">{{ article.title == '' ? 'Website title empty' : article.title }}</h5>
+                        <h5 class="card-title">{{ url.title == '' ? 'Website title empty' : url.title }}</h5>
                         <p class="card-text">{{ article.text }}</p>
                     </div>
                 </div>
@@ -37,22 +37,27 @@ export default {
     },
     mounted() {
         this.get_articles();
-
     },
     methods: {
         get_articles() {
+
             axios.get('/api/articles/show/' + this.id)
                 .then((response) => {
                     this.urls = response.data.data;
                     this.calculateFailedUrl();
                 }).catch((error) => {
                 this.errors = error.response;
+                    if(error.response.status === 404 )
+                    {
+                        window.location.href = "/404";
+                    }
             });
         },
         calculateFailedUrl() {
             let success = 0;
+            console.log(this.urls);
             this.urls.map(index => {
-                if (index.status == 1) success++;
+                if (index.articles[0].status == 1) success++;
             });
             this.greenBar = (success / this.urls.length) * 100;
             this.redBar = 100 - this.greenBar;

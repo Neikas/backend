@@ -20,10 +20,7 @@ class UrlService
         foreach ($urls as $url) {
 
             $data = $scraperService->scrap($url);
-
-            ($data->status) ?
-                $articleService->storeArticles($url, $data) :
-                $articleService->storeFailedArticle($url, $data);
+            $articleService->storeArticles($url, $data) ;
         }
     }
 }

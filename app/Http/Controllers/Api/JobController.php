@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\JobRequest;
 use App\Http\Resources\JobResource;
-use App\Jobs\ProcessNewCrawlerJobs;
 use App\Models\CrawlerJob;
 
 class JobController extends Controller
@@ -16,6 +15,7 @@ class JobController extends Controller
      */
     public function index()
     {
+
         $jobs = CrawlerJob::orderBy('started_at', 'DESC')->with('urls')->get();
 
         return JobResource::collection($jobs);

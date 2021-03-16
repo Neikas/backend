@@ -12,6 +12,7 @@ import VueRouter from "vue-router";
 import CreateJob from './components/CreateJob';
 import IndexJob from "./components/IndexJob";
 import Article from "./components/Article";
+import Notfound from "./components/Notfound.vue";
 import { MdChips } from 'vue-material/dist/components';
 import 'vue-material/dist/vue-material.min.css';
 import 'vue-material/dist/theme/default.css';
@@ -36,6 +37,11 @@ const router = new VueRouter({
             component: Article,
             name:'article.show'
         },
+        {
+            path: '/404',
+            component: Notfound
+        }
+
 
     ]
 })

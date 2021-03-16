@@ -28,15 +28,17 @@ class ProcessNewCrawlerJobs implements ShouldQueue
 
         foreach ($jobs as $job) {
 
-            $job->update(['started_at' => Carbon::now()]);
+            $job->started_at = Carbon::now();
 
             // Process url
             $urlServices = new UrlService();
             $urlServices->processUrls($job->urls()->get());
 
-            $job->update(['finished_at' => Carbon::now()]);
+            $job->finished_at = Carbon::now();
 
-            $job->update(['status' => 'Done']);
+            $job->status = 'Done';
+
+            $job->save();
         }
     }
 }

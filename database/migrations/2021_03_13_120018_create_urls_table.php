@@ -16,6 +16,7 @@ class CreateUrlsTable extends Migration
         Schema::create('urls', function (Blueprint $table) {
             $table->id();
             $table->string('url');
+            $table->string('title')->nullable();
             $table->boolean('status')->default(false);
             $table->foreignId('crawler_job_id');
             $table->timestamps();

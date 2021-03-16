@@ -13,6 +13,7 @@ class Url extends Model
         'url',
         'status',
         'crawler_job_id',
+        'title',
     ];
 
     public function articles()

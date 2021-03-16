@@ -37,12 +37,12 @@ class ScraperService
             return $data;
         }
         //Handles empty
-        if(!$crawler->filter('title')->count() == 0 )
+        if ($crawler->filter('title')->count() > 0)
         {
             $data->title = $crawler->filter('title')->first()->text();
         }
 
-        if(!$crawler->filter('p')->count() == 0 )
+        if ($crawler->filter('p')->count() > 0)
         {
             $data->paragraph = $crawler->filter('p')->each(function ($node) {
                 return $node->text();
